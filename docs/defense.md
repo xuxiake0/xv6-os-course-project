@@ -15,7 +15,7 @@ git status --short
 ./scripts/check-env.sh
 ```
 
-优先演示 mmap（冷编译、启动、现场运行）：
+优先演示 mmap（冷编译、启动、现场运行）。脚本在 E 盘 WSL `/tmp` 中建立隔离快照，不切换或修改主工作树：
 
 ```bash
 ./scripts/defense-demo.sh mmap demo
@@ -160,4 +160,3 @@ git log --oneline --decorate -10
 ```
 
 若 QEMU 无响应，先按 `Ctrl-a x` 正常退出，再确认没有残留进程；不要修改测试或跳过失败项继续演示。
-

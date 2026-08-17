@@ -5,7 +5,7 @@ set -euo pipefail
 repo_root=$(git rev-parse --show-toplevel)
 lab=${1:-mmap}
 mode=${2:-demo}
-original=$(git branch --show-current)
+scratch=
 
 case "$lab" in
   util)    commands=$'sleep 10\npingpong\nprimes\nfind . README\necho hello | xargs echo xv6' ;;
@@ -25,26 +25,24 @@ if [[ $mode != demo && $mode != grade ]]; then
   echo "error: mode must be demo or grade" >&2
   exit 2
 fi
-if [[ -z $original ]]; then
-  echo "error: detached HEAD is not supported" >&2
-  exit 1
-fi
 if [[ -n $(git status --porcelain) ]]; then
-  echo "error: worktree is not clean; refusing to switch branches" >&2
+  echo "error: worktree is not clean; refusing to create a demo snapshot" >&2
   exit 1
 fi
 
-restore_branch() {
-  if [[ $(git branch --show-current) != "$original" ]]; then
-    git switch --quiet "$original" || true
+cleanup() {
+  if [[ -n ${scratch:-} && $scratch == /tmp/xv6-defense.* && -d $scratch ]]; then
+    rm -rf -- "$scratch"
   fi
 }
-trap restore_branch EXIT
+scratch=$(mktemp -d /tmp/xv6-defense.XXXXXX)
+trap cleanup EXIT
 
-git switch --quiet "$lab"
-cd "$repo_root"
+git clone --quiet --local --no-hardlinks "$repo_root" "$scratch/repo"
+git -C "$scratch/repo" switch --quiet --detach "origin/$lab"
+cd "$scratch/repo"
 
-echo "branch: $(git branch --show-current)"
+echo "branch snapshot: $lab"
 echo "commit: $(git rev-parse HEAD)"
 echo "cold build: make clean && make -j4"
 make clean
@@ -58,6 +56,5 @@ fi
 echo
 echo "After the xv6 shell prompt appears, run:"
 printf '  %s\n' "$commands"
-echo "Exit QEMU with Ctrl-a x; the script then restores branch $original."
+echo "Exit QEMU with Ctrl-a x; the main worktree remains unchanged."
 make qemu
-
