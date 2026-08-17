@@ -1,0 +1,33 @@
+qemu-system-riscv64 -machine virt -bios none -kernel kernel/kernel -m 128M -smp 3 -nographic -drive file=fs.img,if=none,format=raw,id=x0 -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+
+xv6 kernel is booting
+
+hart 1 starting
+hart 2 starting
+init: starting sh
+$ bttest
+backtrace:
+0x00000000800021ea
+0x00000000800020b2
+0x0000000080001d4e
+$ alarmtest
+test0 start
+.......................................................................alarm!
+test0 passed
+test1 start
+...alarm!
+..alarm!
+..alarm!
+..alarm!
+...alarm!
+..alarm!
+..alarm!
+..alarm!
+..alarm!
+...alarm!
+test1 passed
+test2 start
+.............................................alarm!
+test2 passed
+$ QEMU: Terminated
+
