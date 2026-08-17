@@ -18,7 +18,7 @@
 - [x] pgtbl（`make grade`：46/46）
 - [x] traps（`make grade`：85/85）
 - [x] cow（`make grade`：110/110）
-- [ ] thread
+- [x] thread（`make grade`：60/60）
 - [ ] net
 - [ ] lock
 - [ ] fs
@@ -27,7 +27,7 @@
 ## Documentation
 
 - [x] Environment
-- [ ] Lab reports（5/10）
+- [ ] Lab reports（6/10）
 - [x] Project README（初稿）
 - [ ] Final report material
 
