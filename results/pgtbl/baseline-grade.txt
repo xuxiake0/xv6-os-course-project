@@ -1,0 +1,98 @@
+date: 2026-08-18T01:24:18+08:00
+branch: pgtbl
+commit: 6da616dfbe3b91125199f46068d21bf9f8f1a415
+upstream: 1e6b2dec7d5ca49571e426ccc6cd686d009b6d07
+command: make grade (lab tasks not implemented)
+make clean
+make[1]: Entering directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \
+*/*.o */*.d */*.asm */*.sym \
+user/initcode user/initcode.out kernel/kernel fs.img \
+mkfs/mkfs .gdbinit \
+        user/usys.S \
+user/_cat user/_echo user/_forktest user/_grep user/_init user/_kill user/_ln user/_ls user/_mkdir user/_rm user/_sh user/_stressfs user/_usertests user/_grind user/_wc user/_zombie  user/_pgtbltest \
+ph barrier
+make[1]: Leaving directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+./grade-lab-pgtbl -v
+/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021/./grade-lab-pgtbl:22: SyntaxWarning: "\s" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\s"? A raw string is also an option.
+  INDENT_ESC = "\\\s*\.\.\\\s*"
+make[1]: Entering directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/entry.o kernel/entry.S
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/kalloc.o kernel/kalloc.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/string.o kernel/string.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/main.o kernel/main.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/vm.o kernel/vm.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/proc.o kernel/proc.c
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/swtch.o kernel/swtch.S
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/trampoline.o kernel/trampoline.S
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/trap.o kernel/trap.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/syscall.o kernel/syscall.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sysproc.o kernel/sysproc.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/bio.o kernel/bio.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/fs.o kernel/fs.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/log.o kernel/log.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sleeplock.o kernel/sleeplock.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/file.o kernel/file.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/pipe.o kernel/pipe.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/exec.o kernel/exec.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sysfile.o kernel/sysfile.c
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/kernelvec.o kernel/kernelvec.S
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/plic.o kernel/plic.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/virtio_disk.o kernel/virtio_disk.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/start.o kernel/start.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/console.o kernel/console.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/printf.o kernel/printf.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/uart.o kernel/uart.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/spinlock.o kernel/spinlock.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_PGTBL -DLAB_PGTBL -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie -march=rv64g -nostdinc -I. -Ikernel -c user/initcode.S -o user/initcode.o
+riscv64-linux-gnu-ld -z max-page-size=4096 --no-warn-rwx-segments -N -e start -Ttext 0 -o user/initcode.out user/initcode.o
+riscv64-linux-gnu-objcopy -S -O binary user/initcode.out user/initcode
+riscv64-linux-gnu-objdump -S user/initcode.o > user/initcode.asm
+riscv64-linux-gnu-ld -z max-page-size=4096 --no-warn-rwx-segments -T kernel/kernel.ld -o kernel/kernel kernel/entry.o kernel/kalloc.o kernel/string.o kernel/main.o kernel/vm.o kernel/proc.o kernel/swtch.o kernel/trampoline.o kernel/trap.o kernel/syscall.o kernel/sysproc.o kernel/bio.o kernel/fs.o kernel/log.o kernel/sleeplock.o kernel/file.o kernel/pipe.o kernel/exec.o kernel/sysfile.o kernel/kernelvec.o kernel/plic.o kernel/virtio_disk.o kernel/start.o kernel/console.o kernel/printf.o kernel/uart.o kernel/spinlock.o
+riscv64-linux-gnu-objdump -S kernel/kernel > kernel/kernel.asm
+riscv64-linux-gnu-objdump -t kernel/kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > kernel/kernel.sym
+make[1]: Leaving directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+== Test pgtbltest == 
+$ make qemu-gdb
+(7.2s) 
+== Test   pgtbltest: ugetpid == 
+  pgtbltest: ugetpid: FAIL 
+    ...
+         $ pgtbltest
+         ugetpid_test starting
+         usertrap(): unexpected scause 0x000000000000000d pid=4
+                     sepc=0x00000000000004a0 stval=0x0000003fffffd000
+         $ qemu-system-riscv64: terminating on signal 15 from pid 834 (make)
+    MISSING '^ugetpid_test: OK$'
+== Test   pgtbltest: pgaccess == 
+  pgtbltest: pgaccess: FAIL 
+    ...
+         $ pgtbltest
+         ugetpid_test starting
+         usertrap(): unexpected scause 0x000000000000000d pid=4
+                     sepc=0x00000000000004a0 stval=0x0000003fffffd000
+         $ qemu-system-riscv64: terminating on signal 15 from pid 834 (make)
+    MISSING '^pgaccess_test: OK$'
+== Test pte printout == 
+$ make qemu-gdb
+pte printout: FAIL (0.6s) 
+    ...
+         hart 1 starting
+         init: starting sh
+         $ echo hi
+         hi
+         $ qemu-system-riscv64: terminating on signal 15 from pid 1242 (make)
+    MISSING '^page table (0x00000000[0-9a-f]+)$'
+    QEMU output saved to xv6.out.pteprint
+== Test answers-pgtbl.txt == answers-pgtbl.txt: FAIL 
+    Cannot read answers-pgtbl.txt
+== Test usertests == 
+$ make qemu-gdb
+(239.8s) 
+== Test   usertests: all tests == 
+  usertests: all tests: OK 
+== Test time == 
+time: FAIL 
+    Cannot read time.txt
+Score: 10/46
+make: *** [Makefile:339: grade] Error 1
