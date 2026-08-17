@@ -19,7 +19,7 @@
 - [x] traps（`make grade`：85/85）
 - [x] cow（`make grade`：110/110）
 - [x] thread（`make grade`：60/60）
-- [ ] net
+- [x] net（`make grade`：100/100）
 - [ ] lock
 - [ ] fs
 - [ ] mmap
@@ -27,7 +27,7 @@
 ## Documentation
 
 - [x] Environment
-- [ ] Lab reports（6/10）
+- [ ] Lab reports（7/10）
 - [x] Project README（初稿）
 - [ ] Final report material
 
