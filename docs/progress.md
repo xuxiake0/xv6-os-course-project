@@ -13,7 +13,7 @@
 
 ## Labs
 
-- [ ] util（进行中）
+- [x] util（`make grade`：100/100）
 - [ ] syscall
 - [ ] pgtbl
 - [ ] traps
@@ -27,7 +27,7 @@
 ## Documentation
 
 - [x] Environment
-- [ ] Lab reports
+- [ ] Lab reports（1/10）
 - [x] Project README（初稿）
 - [ ] Final report material
 
