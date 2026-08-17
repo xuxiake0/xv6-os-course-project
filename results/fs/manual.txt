@@ -1,0 +1,31 @@
+Lab: fs
+Date: 2026-08-18
+Branch: fs
+Official base: 46bcbaf1f2b638ede67e3dd1fcccee226a772fa5
+Implementation commit: 31669abebc5f053aee5891c68196945a50b3481a
+
+Build check:
+  make -j4 kernel/kernel user/_bigfile user/_symlinktest
+  Result: PASS (no compiler or linker errors)
+
+Official grader (E-backed WSL native filesystem):
+  ./grade-lab-fs -v
+  running bigfile: OK (177.2s)
+  symlinktest: symlinks: OK
+  symlinktest: concurrent symlinks: OK
+  usertests: OK (262.7s)
+  time: OK
+  Score: 100/100
+
+Baseline comparison:
+  bigfile stopped at 268 blocks.
+  symlinktest was absent from the file-system image.
+  usertests passed.
+  Score: 19/100.
+
+I/O note:
+  Running the 200 MB fs.img directly on /mnt/d exceeded the bigfile
+  test's 180-second timeout after about 9,500 blocks. The identical
+  source and toolchain passed when mirrored to /root inside Ubuntu's
+  ext4.vhdx on E:. This changes only the grading I/O path, not the code.
+

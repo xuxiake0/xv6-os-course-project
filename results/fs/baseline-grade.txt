@@ -1,0 +1,40 @@
+make: 'kernel/kernel' is up to date.
+== Test running bigfile == 
+$ make qemu-gdb
+running bigfile: FAIL (5.3s) 
+    ...
+         $ bigfile
+         ..
+         wrote 268 blocks
+         bigfile: file is too small
+         $ qemu-system-riscv64: terminating on signal 15 from pid 576 (make)
+    MISSING '^wrote 65803 blocks$'
+    QEMU output saved to xv6.out.bigfile
+== Test running symlinktest == 
+$ make qemu-gdb
+(0.7s) 
+== Test   symlinktest: symlinks == 
+  symlinktest: symlinks: FAIL 
+    ...
+         
+         init: starting sh
+         $ symlinktest
+         exec symlinktest failed
+         $ qemu-system-riscv64: terminating on signal 15 from pid 607 (make)
+    MISSING '^test symlinks: ok$'
+== Test   symlinktest: concurrent symlinks == 
+  symlinktest: concurrent symlinks: FAIL 
+    ...
+         
+         init: starting sh
+         $ symlinktest
+         exec symlinktest failed
+         $ qemu-system-riscv64: terminating on signal 15 from pid 607 (make)
+    MISSING '^test concurrent symlinks: ok$'
+== Test usertests == 
+$ make qemu-gdb
+usertests: OK (117.6s) 
+== Test time == 
+time: FAIL 
+    Cannot read time.txt
+Score: 19/100

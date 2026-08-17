@@ -21,13 +21,13 @@
 - [x] thread（`make grade`：60/60）
 - [x] net（`make grade`：100/100）
 - [x] lock（`make grade`：70/70）
-- [ ] fs
+- [x] fs（`make grade`：100/100）
 - [ ] mmap
 
 ## Documentation
 
 - [x] Environment
-- [ ] Lab reports（8/10）
+- [ ] Lab reports（9/10）
 - [x] Project README（初稿）
 - [ ] Final report material
 
