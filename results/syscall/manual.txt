@@ -1,0 +1,17 @@
+Lab System Calls manual xv6 shell verification
+Date: 2026-08-18 (Asia/Shanghai)
+Branch: syscall
+Commit: 5e9c98cc6cc36875c84825711ddd04d0e70a7717
+
+$ trace 32 grep hello README
+3: syscall read -> 1023
+3: syscall read -> 968
+3: syscall read -> 235
+3: syscall read -> 0
+$ sysinfotest
+sysinfotest: start
+sysinfotest: OK
+
+Exit sequence: Ctrl-a x
+Observed exit output: QEMU: Terminated
+Result: trace filtering and sysinfo manually verified in xv6 shell
