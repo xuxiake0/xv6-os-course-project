@@ -6,6 +6,7 @@
 
 #include "types.h"
 #include "riscv.h"
+#include "memlayout.h"
 #include "defs.h"
 #include "param.h"
 #include "stat.h"
@@ -50,6 +51,56 @@ fdalloc(struct file *f)
     }
   }
   return -1;
+}
+
+uint64
+sys_mmap(void)
+{
+  uint64 requested, length, offset, lowest = TRAPFRAME;
+  int prot, flags;
+  struct file *f;
+  struct proc *p = myproc();
+  struct vma *slot = 0;
+
+  if(argaddr(0, &requested) < 0 || argaddr(1, &length) < 0 ||
+     argint(2, &prot) < 0 || argint(3, &flags) < 0 ||
+     argfd(4, 0, &f) < 0 || argaddr(5, &offset) < 0)
+    return -1;
+  if(requested != 0 || offset != 0 || length == 0 || length > MAXVA ||
+     (flags != MAP_SHARED && flags != MAP_PRIVATE) ||
+     (prot & ~(PROT_READ | PROT_WRITE | PROT_EXEC)) != 0 || prot == 0 ||
+     f->type != FD_INODE || !f->readable ||
+     (flags == MAP_SHARED && (prot & PROT_WRITE) && !f->writable))
+    return -1;
+
+  length = PGROUNDUP(length);
+  for(int i = 0; i < NVMA; i++){
+    if(!p->vmas[i].used && slot == 0)
+      slot = &p->vmas[i];
+    if(p->vmas[i].used && p->vmas[i].addr < lowest)
+      lowest = p->vmas[i].addr;
+  }
+  if(slot == 0 || length > lowest || lowest - length < PGROUNDUP(p->sz))
+    return -1;
+
+  slot->used = 1;
+  slot->addr = lowest - length;
+  slot->length = length;
+  slot->prot = prot;
+  slot->flags = flags;
+  slot->file = filedup(f);
+  slot->offset = offset;
+  return slot->addr;
+}
+
+uint64
+sys_munmap(void)
+{
+  uint64 addr, length;
+
+  if(argaddr(0, &addr) < 0 || argaddr(1, &length) < 0 || length == 0)
+    return -1;
+  return vma_unmap(myproc(), addr, length);
 }
 
 uint64

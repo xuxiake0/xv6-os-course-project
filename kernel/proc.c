@@ -3,6 +3,10 @@
 #include "memlayout.h"
 #include "riscv.h"
 #include "spinlock.h"
+#include "sleeplock.h"
+#include "fs.h"
+#include "file.h"
+#include "fcntl.h"
 #include "proc.h"
 #include "defs.h"
 
@@ -119,6 +123,7 @@ allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
+  memset(p->vmas, 0, sizeof(p->vmas));
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
@@ -164,6 +169,122 @@ freeproc(struct proc *p)
   p->killed = 0;
   p->xstate = 0;
   p->state = UNUSED;
+}
+
+// Resolve one lazy page fault in a file-backed VMA.
+int
+vma_fault(struct proc *p, uint64 faultva, uint64 cause)
+{
+  struct vma *v = 0;
+  char *mem;
+  uint64 va;
+  int perm = PTE_U;
+
+  for(int i = 0; i < NVMA; i++){
+    if(p->vmas[i].used && faultva >= p->vmas[i].addr &&
+       faultva < p->vmas[i].addr + p->vmas[i].length){
+      v = &p->vmas[i];
+      break;
+    }
+  }
+  if(v == 0 ||
+     (cause == 12 && !(v->prot & PROT_EXEC)) ||
+     (cause == 13 && !(v->prot & PROT_READ)) ||
+     (cause == 15 && !(v->prot & PROT_WRITE)))
+    return -1;
+
+  va = PGROUNDDOWN(faultva);
+  pte_t *pte = walk(p->pagetable, va, 0);
+  if(pte && (*pte & PTE_V))
+    return -1;
+  if((mem = kalloc()) == 0)
+    return -1;
+  memset(mem, 0, PGSIZE);
+
+  ilock(v->file->ip);
+  int n = readi(v->file->ip, 0, (uint64)mem,
+                v->offset + (va - v->addr), PGSIZE);
+  iunlock(v->file->ip);
+  if(n < 0){
+    kfree(mem);
+    return -1;
+  }
+
+  if(v->prot & PROT_READ)
+    perm |= PTE_R;
+  if(v->prot & PROT_WRITE)
+    perm |= PTE_R | PTE_W;
+  if(v->prot & PROT_EXEC)
+    perm |= PTE_X;
+  if(mappages(p->pagetable, va, PGSIZE, (uint64)mem, perm) < 0){
+    kfree(mem);
+    return -1;
+  }
+  return 0;
+}
+
+// Unmap a whole VMA or a page-aligned prefix/suffix of one.
+int
+vma_unmap(struct proc *p, uint64 addr, uint64 length)
+{
+  struct vma *v = 0;
+  uint64 end;
+  int error = 0;
+
+  if((addr % PGSIZE) != 0 || length == 0 || length > MAXVA)
+    return -1;
+  length = PGROUNDUP(length);
+  if(addr + length < addr)
+    return -1;
+  end = addr + length;
+
+  for(int i = 0; i < NVMA; i++){
+    if(p->vmas[i].used && addr >= p->vmas[i].addr &&
+       end <= p->vmas[i].addr + p->vmas[i].length){
+      v = &p->vmas[i];
+      break;
+    }
+  }
+  if(v == 0 || (addr != v->addr && end != v->addr + v->length))
+    return -1;
+
+  for(uint64 va = addr; va < end; va += PGSIZE){
+    pte_t *pte = walk(p->pagetable, va, 0);
+    if(pte == 0 || (*pte & PTE_V) == 0)
+      continue;
+
+    if(v->flags == MAP_SHARED && (v->prot & PROT_WRITE)){
+      uint64 pa = PTE2PA(*pte);
+      begin_op();
+      ilock(v->file->ip);
+      if(writei(v->file->ip, 0, pa,
+                v->offset + (va - v->addr), PGSIZE) != PGSIZE)
+        error = -1;
+      iunlock(v->file->ip);
+      end_op();
+    }
+    uvmunmap(p->pagetable, va, 1, 1);
+  }
+
+  if(addr == v->addr && end == v->addr + v->length){
+    fileclose(v->file);
+    memset(v, 0, sizeof(*v));
+  } else if(addr == v->addr){
+    v->addr = end;
+    v->offset += length;
+    v->length -= length;
+  } else {
+    v->length -= length;
+  }
+  return error;
+}
+
+void
+vma_unmap_all(struct proc *p)
+{
+  for(int i = 0; i < NVMA; i++)
+    if(p->vmas[i].used)
+      vma_unmap(p, p->vmas[i].addr, p->vmas[i].length);
 }
 
 // Create a user page table for a given process,
@@ -299,6 +420,12 @@ fork(void)
   for(i = 0; i < NOFILE; i++)
     if(p->ofile[i])
       np->ofile[i] = filedup(p->ofile[i]);
+  for(i = 0; i < NVMA; i++){
+    if(p->vmas[i].used){
+      np->vmas[i] = p->vmas[i];
+      np->vmas[i].file = filedup(p->vmas[i].file);
+    }
+  }
   np->cwd = idup(p->cwd);
 
   safestrcpy(np->name, p->name, sizeof(p->name));
@@ -343,6 +470,8 @@ exit(int status)
 
   if(p == initproc)
     panic("init exiting");
+
+  vma_unmap_all(p);
 
   // Close all open files.
   for(int fd = 0; fd < NOFILE; fd++){
