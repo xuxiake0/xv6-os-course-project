@@ -20,6 +20,7 @@ Ubuntu、APT 安装的软件包与 Linux 用户文件均保存在上述 E 盘虚
 | RISC-V GCC | 15.2.0 (`riscv64-linux-gnu-gcc`) |
 | RISC-V Binutils | 2.46 |
 | GDB multiarch | 17.1 |
+| Python | 3.14.4 + `standard-pipes` 3.13.0 |
 
 ## 3. xv6 来源
 
@@ -34,6 +35,8 @@ Ubuntu 26.04 的 GCC 15 默认目标包含比 2021 课程环境更晚的 RISC-V 
 GCC 15 还新增/加强了递归和旧式函数指针诊断，因此只针对上游 2021 源码抑制 `-Winfinite-recursion` 与 `-Wincompatible-pointer-types`，其他警告仍由 `-Wall -Werror` 管理。
 
 Binutils 2.46 会对 xv6 教学用 RWX 段发出警告；链接标志使用 `--no-warn-rwx-segments` 抑制这一已知且预期的教学内核布局提示。
+
+Python 3.14 已从标准库移除 MIT 2021 grader 使用的 `pipes` 模块。环境中安装 `standard-pipes==3.13.0` 提供兼容模块，官方 `gradelib.py` 与所有测试条件均保持原样。
 
 ## 5. 启动验收
 
