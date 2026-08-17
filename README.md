@@ -10,14 +10,14 @@
 | --- | --- | --- | --- |
 | 1 | Utilities | `util` | 已完成（100/100） |
 | 2 | System calls | `syscall` | 已完成（35/35） |
-| 3 | Page tables | `pgtbl` | 未开始 |
-| 4 | Traps | `traps` | 未开始 |
-| 5 | Copy-on-write | `cow` | 未开始 |
-| 6 | Multithreading | `thread` | 未开始 |
-| 7 | Network driver | `net` | 未开始 |
-| 8 | Lock | `lock` | 未开始 |
-| 9 | File system | `fs` | 未开始 |
-| 10 | mmap | `mmap` | 未开始 |
+| 3 | Page tables | `pgtbl` | 已完成（46/46） |
+| 4 | Traps | `traps` | 已完成（85/85） |
+| 5 | Copy-on-write | `cow` | 已完成（110/110） |
+| 6 | Multithreading | `thread` | 已完成（60/60） |
+| 7 | Network driver | `net` | 已完成（100/100） |
+| 8 | Lock | `lock` | 已完成（70/70） |
+| 9 | File system | `fs` | 已完成（100/100） |
+| 10 | mmap | `mmap` | 已完成（140/140） |
 
 ## 环境
 
@@ -55,6 +55,18 @@ make grade
 ./scripts/run-current-lab.sh
 ```
 
+在不改动主工作树的隔离克隆中复测全部分支：
+
+```bash
+./scripts/run-all-tests.sh
+```
+
+答辩冷构建与交互演示：
+
+```bash
+./scripts/defense-demo.sh mmap demo
+```
+
 ## 项目结构
 
 - `kernel/`：xv6 内核
@@ -66,7 +78,7 @@ make grade
 
 ## 实验报告
 
-各 Lab 报告位于 `docs/labs/`，项目总报告素材将在全部实验验证后汇总。
+各 Lab 报告位于 `docs/labs/`；总报告素材见 [docs/final-report.md](docs/final-report.md)，答辩提纲见 [docs/defense.md](docs/defense.md)。十个官方评分合计 `846/846`。
 
 ## Repository
 

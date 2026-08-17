@@ -1,0 +1,22 @@
+date: 2026-08-18
+branch: mmap
+implementation commit: 054a84f
+
+commands:
+  make clean
+  make -j4
+  make qemu
+
+observed output:
+  xv6 kernel is booting
+  hart 1 starting
+  hart 2 starting
+  init: starting sh
+  $
+
+exit:
+  Ctrl-a x
+  QEMU: Terminated
+
+result: PASS
+

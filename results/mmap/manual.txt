@@ -1,0 +1,32 @@
+Lab: mmap
+Date: 2026-08-18
+Branch: mmap
+Official base: 2255a4ca32a31faeacd902855b77080e3ccbdd8f
+Implementation commit: 054a84f
+
+Build check:
+  make -j4 kernel/kernel user/_mmaptest
+  Result: PASS (no compiler or linker errors)
+
+Targeted grader:
+  ./grade-lab-mmap -v mmaptest
+  mmap f: OK
+  mmap private: OK
+  mmap read-only: OK
+  mmap read/write: OK
+  mmap dirty: OK
+  not-mapped unmap: OK
+  two files: OK
+  fork_test: OK
+
+Official full grader:
+  ./grade-lab-mmap -v
+  all eight mmaptest checks: OK
+  usertests: OK (163.1s)
+  time: OK
+  Score: 140/140
+
+Baseline:
+  mmaptest was absent from the file-system image; all eight mmap
+  checks failed, while usertests passed. Score: 19/140.
+
