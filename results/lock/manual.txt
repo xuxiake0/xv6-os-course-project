@@ -1,0 +1,9 @@
+Targeted lock checks, 2026-08-18:
+
+kalloctest: test1: OK
+kalloctest: test2: OK
+bcachetest: test0: OK
+bcachetest reported bcache/kmem contention total: 163 (required < 500)
+bcachetest: test1: OK
+
+The subsequent clean full grader passed all tests with Score: 70/70.

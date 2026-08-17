@@ -1,0 +1,95 @@
+rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \
+*/*.o */*.d */*.asm */*.sym \
+user/initcode user/initcode.out kernel/kernel fs.img \
+mkfs/mkfs .gdbinit \
+        user/usys.S \
+user/_cat user/_echo user/_forktest user/_grep user/_init user/_kill user/_ln user/_ls user/_mkdir user/_rm user/_sh user/_stressfs user/_usertests user/_grind user/_wc user/_zombie  user/_stats user/_kalloctest user/_bcachetest \
+ph barrier
+make clean
+make[1]: Entering directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg \
+*/*.o */*.d */*.asm */*.sym \
+user/initcode user/initcode.out kernel/kernel fs.img \
+mkfs/mkfs .gdbinit \
+        user/usys.S \
+user/_cat user/_echo user/_forktest user/_grep user/_init user/_kill user/_ln user/_ls user/_mkdir user/_rm user/_sh user/_stressfs user/_usertests user/_grind user/_wc user/_zombie  user/_stats user/_kalloctest user/_bcachetest \
+ph barrier
+make[1]: Leaving directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+./grade-lab-lock -v
+make[1]: Entering directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/entry.o kernel/entry.S
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/kalloc.o kernel/kalloc.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/string.o kernel/string.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/main.o kernel/main.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/vm.o kernel/vm.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/proc.o kernel/proc.c
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/swtch.o kernel/swtch.S
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/trampoline.o kernel/trampoline.S
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/trap.o kernel/trap.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/syscall.o kernel/syscall.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sysproc.o kernel/sysproc.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/bio.o kernel/bio.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/fs.o kernel/fs.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/log.o kernel/log.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sleeplock.o kernel/sleeplock.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/file.o kernel/file.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/pipe.o kernel/pipe.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/exec.o kernel/exec.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sysfile.o kernel/sysfile.c
+riscv64-linux-gnu-gcc -march=rv64gc   -c -o kernel/kernelvec.o kernel/kernelvec.S
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/plic.o kernel/plic.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/virtio_disk.o kernel/virtio_disk.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/stats.o kernel/stats.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/sprintf.o kernel/sprintf.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/start.o kernel/start.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/console.o kernel/console.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/printf.o kernel/printf.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/uart.o kernel/uart.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie  -c -o kernel/spinlock.o kernel/spinlock.c
+riscv64-linux-gnu-gcc -Wall -Werror -O -fno-omit-frame-pointer -ggdb -Wno-infinite-recursion -Wno-incompatible-pointer-types -march=rv64gc -DSOL_LOCK -DLAB_LOCK -MD -mcmodel=medany -ffreestanding -fno-common -nostdlib -mno-relax -I. -fno-stack-protector -fno-pie -no-pie -march=rv64g -nostdinc -I. -Ikernel -c user/initcode.S -o user/initcode.o
+riscv64-linux-gnu-ld -z max-page-size=4096 --no-warn-rwx-segments -N -e start -Ttext 0 -o user/initcode.out user/initcode.o
+riscv64-linux-gnu-objcopy -S -O binary user/initcode.out user/initcode
+riscv64-linux-gnu-objdump -S user/initcode.o > user/initcode.asm
+riscv64-linux-gnu-ld -z max-page-size=4096 --no-warn-rwx-segments -T kernel/kernel.ld -o kernel/kernel kernel/entry.o kernel/kalloc.o kernel/string.o kernel/main.o kernel/vm.o kernel/proc.o kernel/swtch.o kernel/trampoline.o kernel/trap.o kernel/syscall.o kernel/sysproc.o kernel/bio.o kernel/fs.o kernel/log.o kernel/sleeplock.o kernel/file.o kernel/pipe.o kernel/exec.o kernel/sysfile.o kernel/kernelvec.o kernel/plic.o kernel/virtio_disk.o kernel/stats.o kernel/sprintf.o kernel/start.o kernel/console.o kernel/printf.o kernel/uart.o kernel/spinlock.o
+riscv64-linux-gnu-objdump -S kernel/kernel > kernel/kernel.asm
+riscv64-linux-gnu-objdump -t kernel/kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > kernel/kernel.sym
+make[1]: Leaving directory '/mnt/d/Users/zzb426/Desktop/资料/课程/专业课/大二下/操作系统课程设计/xv6-labs-2021'
+== Test running kalloctest == 
+$ make qemu-gdb
+(81.0s) 
+== Test   kalloctest: test1 == 
+  kalloctest: test1: FAIL 
+    ...
+         start test2
+         total free number of pages: 32495 (out of 32768)
+         .....
+         test2 OK
+         $ qemu-system-riscv64: terminating on signal 15 from pid 882 (make)
+    MISSING '^test1 OK$'
+== Test   kalloctest: test2 == 
+  kalloctest: test2: OK 
+== Test kalloctest: sbrkmuch == 
+$ make qemu-gdb
+kalloctest: sbrkmuch: OK (11.9s) 
+== Test running bcachetest == 
+$ make qemu-gdb
+(18.5s) 
+== Test   bcachetest: test0 == 
+  bcachetest: test0: FAIL 
+    ...
+         tot= 62783
+         test0: FAIL
+         start test1
+         test1 OK
+         $ qemu-system-riscv64: terminating on signal 15 from pid 1377 (make)
+    MISSING '^test0: OK$'
+== Test   bcachetest: test1 == 
+  bcachetest: test1: OK 
+== Test usertests == 
+$ make qemu-gdb
+usertests: OK (222.8s) 
+== Test time == 
+time: FAIL 
+    Cannot read time.txt
+Score: 49/70
+make: *** [Makefile:339: grade] Error 1
