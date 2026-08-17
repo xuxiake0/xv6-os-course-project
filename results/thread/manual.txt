@@ -1,0 +1,26 @@
+[ph 1]
+100000 puts, 5.518 seconds, 18123 puts/second
+0: 0 keys missing
+100000 gets, 5.920 seconds, 16892 gets/second
+
+[ph 2]
+100000 puts, 3.654 seconds, 27364 puts/second
+1: 0 keys missing
+0: 0 keys missing
+200000 gets, 6.937 seconds, 28831 gets/second
+
+[barrier 1]
+OK; passed
+[barrier 2]
+OK; passed
+[barrier 4]
+OK; passed
+
+[uthread summary]
+thread_a started
+thread_b started
+thread_c started
+thread_c: exit after 100
+thread_a: exit after 100
+thread_b: exit after 100
+thread_schedule: no runnable threads
