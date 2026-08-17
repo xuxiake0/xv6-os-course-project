@@ -1,0 +1,15 @@
+1. Besides getpid(), calls that return small, frequently-read values can use a
+read-only shared page.  For example, uptime() could read a tick count that the
+kernel updates on every timer tick.  A parent-pid query could use the same idea
+if the kernel also updates the shared value whenever the parent relationship
+changes.  This avoids entering the kernel, while keeping the page read-only in
+user mode prevents the process from forging kernel-maintained state.
+
+2. vmprint shows the three Sv39 page-table levels used by init.  The root has
+valid branches for low user virtual addresses and for the high addresses near
+MAXVA.  User virtual page 0 contains init's program text and data.  Page 2 is
+the writable user stack.  Page 1 is the stack guard page: its PTE is valid but
+does not have PTE_U, so code running in user mode can neither read nor write
+it.  The third-to-last virtual page is USYSCALL.  It contains the kernel-filled
+struct usyscall (currently the process pid) and is mapped read-only for the
+process.  The two pages above it are the trapframe and trampoline mappings.
