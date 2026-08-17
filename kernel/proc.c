@@ -322,6 +322,22 @@ fork(void)
   return pid;
 }
 
+uint64
+nproc(void)
+{
+  struct proc *p;
+  uint64 count = 0;
+
+  for(p = proc; p < &proc[NPROC]; p++){
+    acquire(&p->lock);
+    if(p->state != UNUSED)
+      count++;
+    release(&p->lock);
+  }
+
+  return count;
+}
+
 // Pass p's abandoned children to init.
 // Caller must hold wait_lock.
 void
