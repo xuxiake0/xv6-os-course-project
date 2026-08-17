@@ -1,0 +1,10 @@
+Manual/targeted network run, 2026-08-18:
+
+nettest: ping: OK
+nettest: single process: OK
+nettest: multi-process: OK
+nettest: DNS: OK
+time: OK
+Score: 100/100
+
+QEMU packet capture is stored in the tracked packets.pcap file (17 KiB).
