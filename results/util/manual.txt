@@ -1,0 +1,35 @@
+Lab Utilities manual xv6 shell verification
+Date: 2026-08-18 (Asia/Shanghai)
+Branch: util
+Commit: 1cd9b3fdf47636238b3112d6ef972845c718cd6d
+
+Commands and observed output:
+
+$ sleep 1
+$ echo sleep-ok
+sleep-ok
+$ pingpong
+6: received ping
+5: received pong
+$ primes
+prime 2
+prime 3
+prime 5
+prime 7
+prime 11
+prime 13
+prime 17
+prime 19
+prime 23
+prime 29
+prime 31
+$ mkdir demo
+$ echo data > demo/needle
+$ find . needle
+./demo/needle
+$ echo one two | xargs echo args
+args one two
+
+Exit sequence: Ctrl-a x
+Observed exit output: QEMU: Terminated
+Result: all five Utilities programs manually verified in xv6 shell
