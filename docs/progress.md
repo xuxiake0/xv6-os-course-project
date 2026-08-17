@@ -14,7 +14,7 @@
 ## Labs
 
 - [x] util（`make grade`：100/100）
-- [ ] syscall
+- [x] syscall（`make grade`：35/35）
 - [ ] pgtbl
 - [ ] traps
 - [ ] cow
@@ -27,7 +27,7 @@
 ## Documentation
 
 - [x] Environment
-- [ ] Lab reports（1/10）
+- [ ] Lab reports（2/10）
 - [x] Project README（初稿）
 - [ ] Final report material
 
