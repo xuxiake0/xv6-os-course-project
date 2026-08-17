@@ -1,0 +1,8 @@
+With two put threads, both can choose keys that hash to the same bucket.  Each
+thread can read the same old table[i] head and find that its own key is absent.
+Both allocate a new entry whose next pointer is that same old head.  Thread A
+then stores its entry into table[i], but thread B subsequently stores its own
+entry into table[i].  B's store overwrites the only link to A's entry, so A's
+key is missing even though its put completed.  A mutex per bucket makes the
+read/modify/write sequence atomic for colliding keys while still allowing puts
+to different buckets to proceed in parallel.
