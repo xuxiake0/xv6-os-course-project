@@ -1,0 +1,30 @@
+xv6 course project environment bootstrap
+Date: 2026-08-18 (Asia/Shanghai)
+Branch: util
+Upstream commit: f654383cdec479c9d53a02bffa1ab5526f6c3ca4
+
+WSL: 2.7.11.0 / WSL2
+Ubuntu: 26.04 LTS (Resolute Raccoon)
+WSL storage: E:\WSL\Ubuntu\ext4.vhdx
+Linux kernel: 6.18.33.2-microsoft-standard-WSL2
+QEMU: 10.2.1
+RISC-V GCC: 15.2.0
+RISC-V Binutils: 2.46
+GDB multiarch: 17.1
+Git: 2.53.0
+GNU Make: 4.4.1
+
+Commands run:
+  make clean
+  make qemu
+
+Observed boot output:
+  xv6 kernel is booting
+  hart 2 starting
+  hart 1 starting
+  init: starting sh
+  $
+
+Exit sequence: Ctrl-a x
+Observed exit output: QEMU: Terminated
+Result: baseline build and xv6 shell boot verified
