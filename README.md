@@ -8,7 +8,7 @@
 
 | Lab | Topic | Branch | Status |
 | --- | --- | --- | --- |
-| 1 | Utilities | `util` | 进行中 |
+| 1 | Utilities | `util` | 已完成（100/100） |
 | 2 | System calls | `syscall` | 未开始 |
 | 3 | Page tables | `pgtbl` | 未开始 |
 | 4 | Traps | `traps` | 未开始 |
