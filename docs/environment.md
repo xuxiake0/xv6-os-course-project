@@ -38,7 +38,11 @@ Binutils 2.46 会对 xv6 教学用 RWX 段发出警告；链接标志使用 `--n
 
 Python 3.14 已从标准库移除 MIT 2021 grader 使用的 `pipes` 模块。环境中安装 `standard-pipes==3.13.0` 提供兼容模块，官方 `gradelib.py` 与所有测试条件均保持原样。
 
-## 5. 启动验收
+## 5. 启动验收记录
+
+### 5.1 初始环境验收
+
+初始验收在 `util` 分支的官方起始提交 `f654383cdec479c9d53a02bffa1ab5526f6c3ca4` 上进行，用于确认 WSL2、RISC-V 工具链、QEMU 和 xv6 shell 的基础运行链路可用。
 
 执行：
 
@@ -58,4 +62,16 @@ init: starting sh
 $
 ```
 
-随后使用 `Ctrl-a x` 正常退出，QEMU 输出 `QEMU: Terminated`。原始验收摘要见 `results/environment/bootstrap.txt`。
+随后使用 `Ctrl-a x` 正常退出，QEMU 输出 `QEMU: Terminated`。初始环境验收原始记录保存在 `results/environment/bootstrap.txt`。
+
+### 5.2 最终冷启动验收
+
+全部实验完成后，在 `mmap` 分支的实现提交 `054a84f` 上重新执行冷构建和启动：
+
+```bash
+make clean
+make -j4
+make qemu
+```
+
+终端再次进入 xv6 shell，并通过 `Ctrl-a x` 正常退出，最终结果为 `PASS`。该记录用于确认完成后的代码仍可从干净构建启动；原始输出保存在 `results/environment/final-cold-boot.txt`。

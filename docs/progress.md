@@ -39,3 +39,7 @@
 - [x] Demo script
 - [x] Core questions
 - [x] Backup commands
+
+## Remaining Repository Task
+
+- [ ] 创建个人远程仓库并推送全部需要的 Lab branches

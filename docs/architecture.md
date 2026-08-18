@@ -4,20 +4,25 @@
 
 ```mermaid
 flowchart LR
-  U["用户程序 user/"] -->|"ecall"| T["trampoline / usertrap"]
-  T --> S["syscall 分发"]
-  S --> P["进程与虚拟内存"]
-  S --> F["文件系统与日志"]
-  P --> A["页分配与页表"]
-  F --> B["buffer cache"]
-  B --> D["VirtIO 磁盘"]
-  S --> N["E1000 网络驱动"]
-  I["设备中断 / 时钟"] --> T
+  USER["用户程序"] -->|"ecall"| ENTRY["trampoline<br/>usertrap()"]
+  IRQ["设备 / 时钟中断"] --> ENTRY
+  FAULT["Page fault"] --> ENTRY
+
+  ENTRY -->|"ecall"| SYSCALL["syscall() 分发"]
+  ENTRY -->|"device / timer interrupt"| DEV["devintr()<br/>device path"]
+  ENTRY -->|"page fault"| VM["VM / fault handler"]
+
+  SYSCALL --> PROC["进程 / 内存服务"]
+  SYSCALL --> FS["文件系统"]
+  VM --> MAP["页表 / COW / mmap"]
+  DEV --> DRIVER["调度 / VirtIO / E1000"]
+  FS --> CACHE["buffer cache"]
+  CACHE --> DISK["VirtIO 磁盘"]
 ```
 
 ## 2. 用户态到内核态
 
-用户程序链接 `user/usys.S` 中的短 stub。stub 把系统调用号放入 `a7` 并执行 `ecall`。RISC-V 保存异常原因和返回地址后转入 trampoline；`usertrap()` 识别系统调用，`syscall()` 用 `a7` 索引分发表，具体 `sys_*` 函数读取参数并调用内核子系统。返回时 `usertrapret()` 和 trampoline 恢复 trapframe，执行 `sret` 回到用户态。
+用户程序链接 `user/usys.S` 中的短 stub。stub 把系统调用号放入 `a7` 并执行 `ecall`。RISC-V 保存异常原因和返回地址后转入 trampoline，`usertrap()` 再根据 `scause` 分流：用户 `ecall` 进入 `syscall()`，设备或时钟中断进入 `devintr()` 及相应设备路径，page fault 进入 VM/COW/mmap 故障处理。系统调用返回时，`usertrapret()` 和 trampoline 恢复 trapframe，执行 `sret` 回到用户态。
 
 ## 3. 进程与地址空间
 
@@ -47,4 +52,3 @@ E1000 驱动通过 TX/RX descriptor ring 与设备交换 DMA buffer。发送方�
 | 设备与网络 | net |
 | 多核同步与性能 | lock |
 | inode、日志与路径 | fs |
-

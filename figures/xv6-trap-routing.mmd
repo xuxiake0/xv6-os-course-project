@@ -1,0 +1,15 @@
+flowchart LR
+  USER["用户程序"] -->|"ecall"| ENTRY["trampoline<br/>usertrap()"]
+  IRQ["设备 / 时钟中断"] --> ENTRY
+  FAULT["Page fault"] --> ENTRY
+
+  ENTRY -->|"ecall"| SYSCALL["syscall() 分发"]
+  ENTRY -->|"device / timer interrupt"| DEV["devintr()<br/>device path"]
+  ENTRY -->|"page fault"| VM["VM / fault handler"]
+
+  SYSCALL --> PROC["进程 / 内存服务"]
+  SYSCALL --> FS["文件系统"]
+  VM --> MAP["页表 / COW / mmap"]
+  DEV --> DRIVER["调度 / VirtIO / E1000"]
+  FS --> CACHE["buffer cache"]
+  CACHE --> DISK["VirtIO 磁盘"]

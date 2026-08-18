@@ -2,22 +2,24 @@
 
 ## 项目简介
 
-本项目基于 MIT 6.S081 Fall 2021 的 `xv6-labs-2021`，按官方分支完成十个 RISC-V 操作系统实验。代码、测试记录与实验报告素材均以实际运行结果为准。
+本项目基于 MIT 6.S081 Fall 2021 的 `xv6-labs-2021`，按官方分支完成十个 RISC-V 操作系统实验。代码、测试记录与项目文档均以实际实现和运行结果为依据。
 
 ## 实验列表
 
-| Lab | Topic | Branch | Status |
-| --- | --- | --- | --- |
-| 1 | Utilities | `util` | 已完成（100/100） |
-| 2 | System calls | `syscall` | 已完成（35/35） |
-| 3 | Page tables | `pgtbl` | 已完成（46/46） |
-| 4 | Traps | `traps` | 已完成（85/85） |
-| 5 | Copy-on-write | `cow` | 已完成（110/110） |
-| 6 | Multithreading | `thread` | 已完成（60/60） |
-| 7 | Network driver | `net` | 已完成（100/100） |
-| 8 | Lock | `lock` | 已完成（70/70） |
-| 9 | File system | `fs` | 已完成（100/100） |
-| 10 | mmap | `mmap` | 已完成（140/140） |
+| Lab | Topic | Branch | Score | Status |
+| --- | --- | --- | ---: | --- |
+| util | Utilities | `util` | 100/100 | Completed |
+| syscall | System calls | `syscall` | 35/35 | Completed |
+| pgtbl | Page tables | `pgtbl` | 46/46 | Completed |
+| traps | Traps | `traps` | 85/85 | Completed |
+| cow | Copy-on-write | `cow` | 110/110 | Completed |
+| thread | Multithreading | `thread` | 60/60 | Completed |
+| net | Network driver | `net` | 100/100 | Completed |
+| lock | Lock | `lock` | 70/70 | Completed |
+| fs | File system | `fs` | 100/100 | Completed |
+| mmap | mmap | `mmap` | 140/140 | Completed |
+
+**Total: 846/846**
 
 ## 环境
 
@@ -72,14 +74,17 @@ make grade
 - `kernel/`：xv6 内核
 - `user/`：用户程序与用户态库
 - `mkfs/`：文件系统镜像生成工具
-- `docs/`：环境、进度和实验报告素材
+- `docs/`：环境说明、项目总报告、实验报告和答辩材料
 - `results/`：实际测试输出
 - `scripts/`：环境检查、测试和答辩脚本
 
-## 实验报告
+## 项目文档
 
-各 Lab 报告位于 `docs/labs/`；总报告素材见 [docs/final-report.md](docs/final-report.md)，答辩提纲见 [docs/defense.md](docs/defense.md)。十个官方评分合计 `846/846`。
+项目总报告见 [docs/final-report.md](docs/final-report.md)，各 Lab 详细报告位于 `docs/labs/`，答辩手册见 [docs/defense.md](docs/defense.md)，PPT 内容规划见 [docs/ppt-outline.md](docs/ppt-outline.md)。十个官方评分合计 `846/846`。
+
+内部提交检查记录保留在 [docs/submission-readiness.md](docs/submission-readiness.md) 和 [docs/final-audit.md](docs/final-audit.md)，不作为老师阅读项目的主入口。
 
 ## Repository
 
-上游仓库：`git://g.csail.mit.edu/xv6-labs-2021`。课程项目远程仓库链接待用户配置后补充。
+- MIT 官方上游：`git://g.csail.mit.edu/xv6-labs-2021`
+- 个人项目仓库：尚未创建；创建并推送后在此填写真实 URL
