@@ -19,17 +19,6 @@
 
 **关键词：** xv6-riscv；系统调用；Sv39；Trap；Copy-on-Write；文件系统；mmap
 
-## 阅读导航与目录生成
-
-本文使用分级 Markdown Heading：一级标题为报告题目，二级标题为主章节，三级标题为实验内部结构。转换为 Word 后可在“引用 → 目录”中插入自动目录；转换为 PDF 前应更新目录、页码、图表编号和交叉引用。
-
-- 项目范围与工作量：第 1～2 章
-- 环境与总体架构：第 3～4 章
-- 10 个实验：第 5～14 章
-- 统一测试证据：第 15 章
-- 共性问题、总结与仓库：第 16～18 章
-- 详细 Lab 报告、复现命令和答辩材料：附录
-
 ## 1. 项目概述
 
 xv6 是对 Unix Version 6 思想的教学性重实现，代码量较小，但具有进程、虚拟内存、系统调用、文件系统、设备驱动和多核同步等完整主干。RISC-V 的 privilege mode、异常寄存器和调用约定较清晰，适合从用户指令开始跟踪到内核数据结构和硬件接口。
@@ -69,7 +58,7 @@ xv6 是对 Unix Version 6 思想的教学性重实现，代码量较小，但具
 | mmap | mmap | 140/140 | Completed |
 | **Total** | **10/10 Labs** | **846/846** | **Completed** |
 
-十个实验分支覆盖课程规定的全部实验内容，按课程说明中的工作量分级属于 A 级工作量范围。各分支均有对应实现和官方 grader 结果，形成从用户程序到内核核心机制的完整实验序列。
+十个实验分支覆盖课程规定的全部实验内容，对应课程说明中“完成全部实验内容”的 A 级工作量描述。各分支均有对应实现和官方 grader 结果，形成从用户程序到内核核心机制的完整实验序列。
 
 ## 3. 实验环境与复现边界
 
@@ -88,6 +77,10 @@ xv6 是对 Unix Version 6 思想的教学性重实现，代码量较小，但具
 
 ## 4. xv6 总体架构
 
+![xv6 用户态、Trap 与内核子系统调用关系](../figures/xv6-trap-routing.png)
+
+*图 4-1 xv6 用户态、Trap 与内核子系统调用关系*
+
 ### 4.1 用户态、系统调用与 Trap
 
 用户程序运行在 user mode，内核运行在 supervisor mode。用户 stub 将系统调用号写入 `a7` 并执行 `ecall`；trampoline 把用户寄存器保存到 `trapframe`，`usertrap()` 判断 trap 原因，`syscall()` 再按编号调用处理函数。系统调用返回值写入 trapframe 的 `a0`，`usertrapret()` 和 trampoline 恢复用户现场。
@@ -102,7 +95,7 @@ Sv39 使用三级页表和 4 KiB 页面。`walk()` 查找 PTE，`mappages()` 建
 
 ### 4.4 并发、文件系统与设备
 
-spinlock 保护短临界区，sleeplock 保护可能睡眠的长期操作。文件名经目录项解析为 inode，buffer cache 缓存磁盘块，日志保证多块更新的崩溃一致性。VirtIO 提供磁盘，E1000 通过 DMA descriptor ring 收发网络包。架构图及组件关系见 [docs/architecture.md](architecture.md)。
+spinlock 保护短临界区，sleeplock 保护可能睡眠的长期操作。文件名经目录项解析为 inode，buffer cache 缓存磁盘块，日志保证多块更新的崩溃一致性。VirtIO 提供磁盘，E1000 通过 DMA descriptor ring 收发网络包。总体调用与 Trap 分流关系如图 4-1 所示，项目仓库中的 [docs/architecture.md](architecture.md) 提供进一步的组件说明。
 
 ## 5. Lab 01：Utilities
 
@@ -366,9 +359,10 @@ mmap 把系统调用、文件、页表、trap 和进程清理连接起来。正�
 
 ## 18. 项目源码托管链接
 
+> **FINAL EXPORT BLOCKER：** 真实个人 Git URL 尚未提供。收到真实地址后，必须替换下方 `<REAL_URL>`；正式提交版不保留本段阻塞说明。
+
+- 项目源码托管地址：`<REAL_URL>`
 - MIT 官方上游：`git://g.csail.mit.edu/xv6-labs-2021`
-- 本地项目：当前 Git 仓库，十个实验分支及实现提交均存在
-- 个人项目仓库：尚未配置；创建并推送后写入真实 URL
 
 ## 附录 A：详细实验报告导航
 
