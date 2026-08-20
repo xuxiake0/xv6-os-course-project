@@ -86,5 +86,5 @@ make grade
 
 ## Repository
 
+- 项目仓库：https://github.com/xuxiake0/xv6-os-course-project
 - MIT 官方上游：`git://g.csail.mit.edu/xv6-labs-2021`
-- 个人项目仓库：尚未创建；创建并推送后在此填写真实 URL

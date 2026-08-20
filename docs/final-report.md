@@ -359,9 +359,7 @@ mmap 把系统调用、文件、页表、trap 和进程清理连接起来。正�
 
 ## 18. 项目源码托管链接
 
-> **FINAL EXPORT BLOCKER：** 真实个人 Git URL 尚未提供。收到真实地址后，必须替换下方 `<REAL_URL>`；正式提交版不保留本段阻塞说明。
-
-- 项目源码托管地址：`<REAL_URL>`
+- 项目源码托管地址：https://github.com/xuxiake0/xv6-os-course-project
 - MIT 官方上游：`git://g.csail.mit.edu/xv6-labs-2021`
 
 ## 附录 A：详细实验报告导航
